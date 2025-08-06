@@ -4,29 +4,32 @@ import dotenv from "dotenv";
 import connectDB from "./config/db";
 import filmRoutes from "./routes/film.routes";
 
-// Inisialisasi dotenv dan koneksi database terlebih dahulu
+// ✅ Inisialisasi environment variables
 dotenv.config();
+
+// ✅ Koneksi ke database
 connectDB();
 
+// ✅ Inisialisasi express
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
-// Middleware
+// ✅ Middleware global
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // untuk parsing body JSON
 
-// Serve static image files from public/uploads
+// ✅ Serve file statis (jika ada gambar lokal)
 app.use("/uploads", express.static("public/uploads"));
 
-// Gunakan route film setelah deklarasi app
+// ✅ Routes
 app.use("/api/films", filmRoutes);
 
-// (Opsional) Route testing manual
-app.get("/", (req, res) => {
-  res.send("API is running...");
+// ✅ Test route (opsional)
+app.get("/", (_req, res) => {
+  res.send("🎬 API Film is running...");
 });
 
-// Jalankan server
+// ✅ Jalankan server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
