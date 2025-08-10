@@ -1,0 +1,7 @@
+{
+  "name": "project_film",
+  "private": true,
+  "scripts": {
+    "build": "cd backend_api && npm install && npm run build && cd ../lanepage_film && npm install && npm run build"
+  }
+}
